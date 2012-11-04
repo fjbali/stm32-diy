@@ -415,6 +415,16 @@
               <FileType>5</FileType>
               <FilePath>..\App\includes.h</FilePath>
             </File>
+            <File>
+              <FileName>LCD1602.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\LCD1602.c</FilePath>
+            </File>
+            <File>
+              <FileName>DS1302.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\DS1302.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
