@@ -88,6 +88,7 @@ void LCD_Test(void)
 }
 
 unsigned char timebuf[16] = {0, };
+unsigned char databuf[16] = {0, };
 
 void DS1302_Test()
 {
@@ -103,8 +104,10 @@ void DS1302_Test()
   	{
 		memset(timedat, 0, sizeof(timedat));
   		DS1302_ReadTime(timedat);
-		sprintf((char*)timebuf, "%02d:%02d:%02d",timedat[4], timedat[5], timedat[6]);
+		sprintf((char*)timebuf, "Time: %02d:%02d:%02d",timedat[4], timedat[5], timedat[6]);
+		sprintf((char*)databuf, "Date: %02d-%02d-%02d", timedat[1], timedat[2], timedat[3]);
 		LCD_Clear();
+		LCD_Write_String(1, 0, databuf);
 		LCD_Write_String(1, 1, timebuf);
 		OSTimeDlyHMSM(0, 0, 1, 0);
 //		while(1);
