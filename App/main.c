@@ -1,6 +1,7 @@
 #include "includes.h"
 #include "LCD1602.h"
 #include "DS1302.h"
+#include "24C64.h"
 #include <stdio.h>
 
 static OS_STK   TaskStartStk[TASK_START_STK_SIZE];	// 定义起始任务堆栈大小
@@ -104,13 +105,30 @@ void DS1302_Test()
   	{
 		memset(timedat, 0, sizeof(timedat));
   		DS1302_ReadTime(timedat);
-		sprintf((char*)timebuf, "Time: %02d:%02d:%02d",timedat[4], timedat[5], timedat[6]);
-		sprintf((char*)databuf, "Date: %02d-%02d-%02d", timedat[1], timedat[2], timedat[3]);
+		sprintf((char*)timebuf, "%02d-%02d %02d:%02d:%02d", timedat[2], timedat[3], timedat[4], timedat[5], timedat[6]);
 		LCD_Clear();
-		LCD_Write_String(1, 0, databuf);
-		LCD_Write_String(1, 1, timebuf);
+//		LCD_Write_String(1, 0, databuf);
+		LCD_Write_String(1, 0, timebuf);
 		OSTimeDlyHMSM(0, 0, 1, 0);
 //		while(1);
+	}
+}
+
+unsigned char dispbuf[16] = {0, };
+void AT24C64_Test(void)
+{
+	unsigned char data = 0;
+
+	LCD_Init();
+	LCD_Clear();
+	AT24C64_Init();
+//	AT24C64_Write(0xf7, 0x0);
+	data = AT24C64_Read(0x0);
+	sprintf((char*)dispbuf, "I Read:%d", data);
+	LCD_Write_String(1, 0, dispbuf);
+	while(1)
+	{
+
 	}
 }
 
@@ -118,7 +136,7 @@ static void Task1(void *p_arg)
 {     
    while(1)
    {	
-		DS1302_Test(); 
+		AT24C64_Test(); 
  	}
 }
 
