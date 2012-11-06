@@ -121,14 +121,14 @@ unsigned char I2C_Read8Bit()
 	{
 //		SCL=1;
 		GPIO_WriteBit(AT24C64_GPIO, AT24C64_SCL, Bit_SET);
-//		DelayMs(2);
+		DelayMs(1);
 		rbyte=rbyte<<1;
 //		rbyte=rbyte|((unsigned char)(SDA));
 		rbyte = rbyte | GPIO_ReadInputDataBit(AT24C64_GPIO, AT24C64_SDA);
-//		DelayMs(2);
+		DelayMs(1);
 //		SCL=0;
 		GPIO_WriteBit(AT24C64_GPIO, AT24C64_SCL, Bit_RESET);
-//		DelayMs(2);
+		DelayMs(1);
 	}
 	return(rbyte);
 }

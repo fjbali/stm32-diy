@@ -122,8 +122,9 @@ void AT24C64_Test(void)
 	LCD_Init();
 	LCD_Clear();
 	AT24C64_Init();
-//	AT24C64_Write(0xf7, 0x0);
-	data = AT24C64_Read(0x0);
+	AT24C64_Write(45, 0x8);
+
+	data = AT24C64_Read(0x8);
 	sprintf((char*)dispbuf, "I Read:%d", data);
 	LCD_Write_String(1, 0, dispbuf);
 	while(1)
@@ -135,8 +136,9 @@ void AT24C64_Test(void)
 static void Task1(void *p_arg)
 {     
    while(1)
-   {	
-		AT24C64_Test(); 
+   {
+//   		AT24C64_Test();	
+		DS1302_Test(); 
  	}
 }
 
